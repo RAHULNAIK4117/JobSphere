@@ -44,5 +44,5 @@ JobSphere is a full-featured job listing and resource portal built with the MERN
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/RAHULNAIK4117/JobSphere
+git clone https://github.com/RAHULNAIK4117/JobSphere.git
 cd jobsphere
