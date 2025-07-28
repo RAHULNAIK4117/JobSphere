@@ -5,7 +5,7 @@ import Login from './pages/login.jsx';
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
 import { jobData } from './jobs/jobdata.js';
-import { Jobprovider } from './context/jobcontext.jsx';
+
 import Footer from './components/footer.jsx';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-    <Jobprovider>
+    
 
       <Navbar 
         
@@ -43,7 +43,7 @@ function App() {
         <Route path='/login' element={<Login />} />
       </Routes>
 
-      </Jobprovider>
+      
     </>
   );
 }
