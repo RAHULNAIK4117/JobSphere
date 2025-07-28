@@ -19,7 +19,7 @@ const Sidebar = ({ filters, activeFilter, setActiveFilter, filteredJobs }) => {
               onClick={() => setActiveFilter(filter)}
               className={`px-4 py-2 text-sm lg:text-base rounded-lg font-medium w-[120px] text-center transition duration-200 ${
                 activeFilter === filter
-                  ? "bg-blue-500 text-white"
+                  ? "text-white bg-[linear-gradient(to_top,#5ee7df_0%,#b490ca_100%)]"
                   : "hover:bg-blue-100 text-gray-800"
               }`}
             >
@@ -40,7 +40,7 @@ const Sidebar = ({ filters, activeFilter, setActiveFilter, filteredJobs }) => {
                 onClick={() => setActiveFilter(filter)}
                 className={`whitespace-nowrap px-4 py-2 text-sm rounded-lg font-medium transition duration-200 ${
                   activeFilter === filter
-                    ? "bg-blue-500 text-white"
+                    ? "text-white bg-[linear-gradient(to_top,#5ee7df_0%,#b490ca_100%)]"
                     : "hover:bg-blue-100 text-gray-800"
                 }`}
               >

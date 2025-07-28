@@ -5,8 +5,12 @@ import Login from './pages/login.jsx';
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
 import { jobData } from './jobs/jobdata.js';
+import { Jobprovider } from './context/jobcontext.jsx';
+import Footer from './components/footer.jsx';
 
 function App() {
+
+   
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -17,8 +21,10 @@ function App() {
 
   return (
     <>
+    <Jobprovider>
+
       <Navbar 
-        title='indian job leloo'
+        
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
@@ -29,10 +35,15 @@ function App() {
         setActiveFilter={setActiveFilter}
         filteredJobs={filteredJobs}
       />
+      <Footer/>
+
+
 
       <Routes>
         <Route path='/login' element={<Login />} />
       </Routes>
+
+      </Jobprovider>
     </>
   );
 }

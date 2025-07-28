@@ -1,7 +1,10 @@
 import { MdAccountCircle } from "react-icons/md";
 import { BsFillSearchHeartFill } from "react-icons/bs";
+import { usejob } from "../context/jobcontext";
 
-const Navbar = ({title,searchQuery, setSearchQuery}) => {
+const Navbar = ({searchQuery, setSearchQuery}) => {
+   const {title} = usejob();
+   
   return (
     <nav className="flex justify-between text-center items-center p-4 navbararea">
       <div>
