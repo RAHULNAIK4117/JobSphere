@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { usejob } from '../context/jobcontext.jsx';
 
 const Footer = () => {

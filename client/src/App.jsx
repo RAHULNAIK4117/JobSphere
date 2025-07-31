@@ -1,23 +1,36 @@
-import { useState } from 'react';
+import Api from "./utils/api";
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar.jsx';
 import Login from './pages/login.jsx';
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
-import { jobData } from './jobs/jobdata.js';
-
 import Footer from './components/footer.jsx';
+
 
 function App() {
 
-   
+   const [jobData, setJobData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
 
-  const filteredJobs = jobData.filter((job) =>
-    job.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    (searchQuery !== "" || activeFilter === "All" || job.type === activeFilter)
-  );
+  useEffect(() => {
+  Api.get("/jobs") 
+    .then((res) => setJobData(res.data))
+    .catch((err) => console.error("Failed to fetch jobs:", err));
+}, []);
+
+  const filteredJobs = jobData.filter((job) => {
+  const titleMatch = job.title.toLowerCase().includes(searchQuery.toLowerCase());
+  const categoryMatch = activeFilter === "All" || job.category.toLowerCase() === activeFilter.toLowerCase();
+
+  if (searchQuery.trim() !== "") {
+        return titleMatch;
+  }
+ 
+  return titleMatch && categoryMatch;
+});
+
 
   return (
     <>
@@ -35,13 +48,15 @@ function App() {
         setActiveFilter={setActiveFilter}
         filteredJobs={filteredJobs}
       />
-      <Footer/>
+      
 
 
 
       <Routes>
         <Route path='/login' element={<Login />} />
+        
       </Routes>
+      <Footer/>
 
       
     </>

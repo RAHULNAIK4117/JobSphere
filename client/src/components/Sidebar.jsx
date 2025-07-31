@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { jobData } from "../jobs/jobdata.js";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 
 const Sidebar = ({ filters, activeFilter, setActiveFilter, filteredJobs }) => {
-  
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col lg:flex-row h-screen">
@@ -60,10 +60,11 @@ const Sidebar = ({ filters, activeFilter, setActiveFilter, filteredJobs }) => {
           {filteredJobs.map((job) => (
             <div
               key={job.id}
-              className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition"
+              className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition cursor-p"
+              onClick={() => navigate(`/jobs/${job._id}`)}
             >
               <h2 className="text-lg font-semibold">{job.title}</h2>
-              <p className="text-sm text-gray-500">{job.type}</p>
+              <p className="text-sm text-gray-500">{job.salary}</p>
             </div>
           ))}
         </div>
