@@ -16,19 +16,10 @@ const jobSchema = new mongoose.Schema({
   lastDate: Date,
   description: String,
   about: String,
-  image: {
-    url: String,
-    public_id: String
-  },
-  pdf: {
-    url: String,
-    public_id: String
-  },
   links: {
     link1: String,
-    link2: String,
-    link3: String
-  },
+    link2: String
+      },
   postedAt: {
     type: Date,
     default: Date.now

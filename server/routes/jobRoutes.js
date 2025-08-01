@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Job = require("../models/job");
 
-// POST job (without image/pdf upload)
+// POST job 
 router.post("/", async (req, res) => {
   try {
     const job = new Job(req.body);

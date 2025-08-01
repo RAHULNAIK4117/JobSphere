@@ -1,11 +1,11 @@
 import Api from "./utils/api";
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar.jsx';
-import Login from './pages/login.jsx';
+
+import Navbar from './components/Navbar.jsx';
+
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
-import Footer from './components/footer.jsx';
+import Footer from './components/Footer.jsx';
 
 
 function App() {
@@ -43,19 +43,14 @@ function App() {
       />
 
       <Sidebar
-        filters={["All", "Gov Job", "Private Job", "Part-Time", "Self-Employment"]}
+        filters={["All", "government Job", "Private Job", "part-time Job", "self-employment Job"]}
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
         filteredJobs={filteredJobs}
       />
       
 
-
-
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        
-      </Routes>
+      
       <Footer/>
 
       
