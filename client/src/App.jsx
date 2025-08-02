@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.jsx';
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
 import Footer from './components/Footer.jsx';
+import About from "./components/About.jsx";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
       />
       
 
-      
+      <About/>
       <Footer/>
 
       

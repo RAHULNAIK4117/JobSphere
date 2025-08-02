@@ -8,7 +8,7 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
   return (
     <nav className="flex justify-between text-center items-center p-4 navbararea">
       <div>
-        <b className="title">{title}</b>
+        <b className="title lg:text-2xl font-extrabold leading-tight drop-shadow-md">{title}</b>
       </div>
 
       <div className="flex items-center justify-center border-1 rounded-2xl ">

@@ -6,7 +6,7 @@ const Jobcontext = createContext();
 
 export const Jobprovider =({children}) => {
 
-    const title = ' Indian JobLelo';
+    const title = ' JOBSPHERE';
 
     return(
         <Jobcontext.Provider value={{title}}>
