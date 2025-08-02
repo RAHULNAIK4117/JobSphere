@@ -1,68 +1,86 @@
-
-
-import React, { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import API from "../utils/api";
+import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleLogin = async () => {
+    if (!username || !password) {
+      toast.error("Please enter username and password");
+      return;
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: Add authentication logic here
-    console.log("Login submitted:", formData);
+    try {
+      const response = await API.post(
+        `${import.meta.env.VITE_API_BASE_URL}/admin/login`,
+        { username, password }
+      );
+
+      localStorage.setItem("isAdmin", "true");
+      localStorage.setItem("token", response.data.token);
+      toast.success("Login successful!");
+      navigate("/admin");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-800 p-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Admin Panel Login</h2>
-        <p className="text-center font-bold text-gray-800 mb-6">Hi😏Rahul</p>
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-gray-600 mb-1 font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="admin@example.com"
-            />
-          </div>
-          <div className="relative">
-            <label className="block text-gray-600 mb-1 font-medium">Password</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="••••••••"
-            />
-            <div
-              className="absolute top-9 right-3 cursor-pointer text-gray-500"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FiEyeOff /> : <FiEye />}
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] px-4">
+      <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8 w-full max-w-md animate-fadeIn scale-100 transition-all">
+        <h2 className="text-3xl font-extrabold text-white text-center mb-8 tracking-wide">JOB SPHINX PANEL</h2>
+        <p className=" font-extrabold text-white text-center tracking-wide">Hi,Rahul</p>
+
+        {/* Username */}
+        <div className="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="block py-2.5 px-4 w-full text-sm text-white bg-transparent border-b border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+            placeholder=" "
+          />
+          <label htmlFor="username" className="absolute text-sm text-gray-300 duration-300 transform -translate-y-6 scale-75 top-2 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2.5 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Username
+          </label>
+        </div>
+
+        {/* Password */}
+        <div className="relative z-0 w-full mb-6 group">
+          <input
+            type={showPass ? "text" : "password"}
+            name="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="block py-2.5 px-4 w-full text-sm text-white bg-transparent border-b border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer pr-10"
+            placeholder=" "
+          />
+          <label htmlFor="password" className="absolute text-sm text-gray-300 duration-300 transform -translate-y-6 scale-75 top-2 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2.5 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Password
+          </label>
+          <span
+            onClick={() => setShowPass(!showPass)}
+            className="absolute top-3 right-3 text-white cursor-pointer"
           >
-            Login
-          </button>
-        </form>
-        <p className="text-sm text-center text-gray-500 mt-6">
-          &copy; {new Date().getFullYear()} job sphere. All rights reserved.
-        </p>
+            {showPass ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+          </span>
+        </div>
+
+        <button
+          onClick={handleLogin}
+          className="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-semibold py-3 rounded-lg hover:scale-[1.03] transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
+          🔐 Login
+        </button>
       </div>
     </div>
   );

@@ -22,8 +22,8 @@ const Navbar = ({searchQuery, setSearchQuery}) => {
         <BsFillSearchHeartFill className="mr-2" />
       </div>
 
-      
-      <div className="text-2xl lg:text-4xl">
+      {/* //////////////////onChange this after add account logic  clear opacity -0 */}   
+      <div className="text-2xl lg:text-4xl opacity-0 ">
         <MdAccountCircle />
       </div>
     </nav>

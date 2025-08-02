@@ -1,14 +1,33 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-import Login from './pages/Login.jsx'
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAdmin") === "true"
+  );
 
-import './App.css'
+  const location = useLocation();
 
-export default function App() {
+  
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
+    setIsAuthenticated(isAdmin);
+  }, [location]);
+
   return (
-    <>
-    <p>app</p>
-    </>
-    
+    <Routes>
+      <Route
+        path="/"
+        element={isAuthenticated ? <Navigate to="/admin/" /> : <Login />}
+      />
+      <Route
+        path="/admin/*"
+        element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
+      />
+    </Routes>
   );
 }
+
+export default App;

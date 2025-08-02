@@ -1,8 +1,6 @@
 import Api from "./utils/api";
 import { useState, useEffect } from 'react';
-
 import Navbar from './components/Navbar.jsx';
-
 import './App.css';
 import Sidebar from './components/Sidebar.jsx';
 import Footer from './components/Footer.jsx';

@@ -17,7 +17,9 @@ mongoose.connect(process.env.MONGO_URI)
 require("./cron/deleteExpiredJobs");
 
 const jobRoutes = require("./routes/jobRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/jobs", jobRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
